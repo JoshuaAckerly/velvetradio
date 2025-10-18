@@ -137,5 +137,57 @@
 
     body {
         @apply bg-background text-foreground;
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.45;
     }
+}
+
+/* Reusable components and utilities to improve visual quality */
+@layer components {
+    .container {
+        @apply mx-auto px-4;
+        max-width: 90rem; /* ~1440px */
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium shadow-sm transition-colors duration-150;
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+    }
+
+    .btn:hover {
+        filter: brightness(0.95);
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center px-3 py-1.5 rounded-md font-medium shadow-sm transition-colors duration-150;
+        background-color: var(--secondary);
+        color: var(--secondary-foreground);
+    }
+
+    .card {
+        @apply p-6 rounded-lg shadow-sm border;
+        background-color: var(--color-card);
+        color: var(--color-card-foreground);
+        border-color: var(--color-border);
+    }
+
+    header.site-header {
+        @apply border-b;
+        border-color: var(--color-border);
+        background-color: var(--color-sidebar);
+        color: var(--color-sidebar-foreground);
+    }
+
+    footer.site-footer {
+        @apply text-sm py-6;
+        background-color: color-mix(in oklab, var(--color-foreground) 8%, transparent);
+        color: var(--color-foreground);
+    }
+}
+
+@layer utilities {
+    .muted { color: var(--color-muted-foreground); }
 }

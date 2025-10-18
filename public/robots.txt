@@ -1,2 +1,5 @@
 User-agent: *
 Disallow:
+
+# Sitemap
+Sitemap: https://velvetradio.graveyardjokes.com/sitemap.xml
