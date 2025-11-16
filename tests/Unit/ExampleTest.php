@@ -2,14 +2,12 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class ExampleTest extends TestCase
 {
-    use RefreshDatabase;
-
-    public function test_that_true_is_true()
+    /** @test */
+    public function it_checks_that_true_is_true()
     {
         $this->assertTrue(true);
     }
