@@ -19,9 +19,12 @@ class DatabaseSeeder extends Seeder
             EpisodeSeeder::class,
         ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Only create test user in non-production environments
+        if (app()->environment('local', 'development')) {
+            User::factory()->create([
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+            ]);
+        }
     }
 }
