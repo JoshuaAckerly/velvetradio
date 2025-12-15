@@ -17,6 +17,10 @@ lsof -ti:$SSR_PORT | xargs kill -TERM 2>/dev/null || true
 sleep 2
 lsof -ti:$SSR_PORT | xargs kill -9 2>/dev/null || true
 
+# Configure git to handle divergent branches
+echo "⚙️ Configuring git..."
+git config pull.rebase false
+
 # Update Git repository
 echo "📦 Pulling latest code..."
 git pull origin $FORGE_SITE_BRANCH
