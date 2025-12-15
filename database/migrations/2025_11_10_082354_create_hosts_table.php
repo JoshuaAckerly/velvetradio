@@ -11,16 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-<<<<<<< HEAD
-        Schema::create('hosts', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('bio')->nullable();
-            $table->string('avatar')->nullable();
-            $table->foreignId('show_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
-=======
         if (!Schema::hasTable('hosts')) {
             Schema::create('hosts', function (Blueprint $table) {
                 $table->id();
@@ -31,7 +21,6 @@ return new class extends Migration
                 $table->timestamps();
             });
         }
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
     }
 
     /**
