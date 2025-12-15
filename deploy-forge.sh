@@ -19,7 +19,8 @@ lsof -ti:$SSR_PORT | xargs kill -9 2>/dev/null || true
 
 # Update Git repository
 echo "📦 Pulling latest code..."
-git pull --no-rebase origin $FORGE_SITE_BRANCH
+git fetch origin $FORGE_SITE_BRANCH
+git reset --hard origin/$FORGE_SITE_BRANCH
 
 # Update PHP dependencies
 echo "🐘 Installing PHP dependencies..."
