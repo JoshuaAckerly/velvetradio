@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+<<<<<<< HEAD
         Schema::create('shows', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -21,6 +22,20 @@ return new class extends Migration
             
             $table->index('active');
         });
+=======
+        if (!Schema::hasTable('shows')) {
+            Schema::create('shows', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
+                $table->text('description');
+                $table->string('slug')->unique();
+                $table->boolean('active')->default(true);
+                $table->timestamps();
+                
+                $table->index('active');
+            });
+        }
+>>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
     }
 
     /**

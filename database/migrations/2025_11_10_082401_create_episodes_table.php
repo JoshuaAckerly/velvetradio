@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+<<<<<<< HEAD
         Schema::create('episodes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -24,6 +25,23 @@ return new class extends Migration
             $table->index('published_at');
             $table->index('show_id');
         });
+=======
+        if (!Schema::hasTable('episodes')) {
+            Schema::create('episodes', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
+                $table->text('description')->nullable();
+                $table->string('audio_file')->nullable();
+                $table->integer('duration')->nullable(); // in seconds
+                $table->date('published_at');
+                $table->foreignId('show_id')->constrained()->onDelete('cascade');
+                $table->timestamps();
+                
+                $table->index('published_at');
+                $table->index('show_id');
+            });
+        }
+>>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
     }
 
     /**
