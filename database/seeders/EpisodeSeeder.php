@@ -2,38 +2,20 @@
 
 namespace Database\Seeders;
 
-<<<<<<< HEAD
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-=======
 use App\Models\Episode;
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
 use Illuminate\Database\Seeder;
 
 class EpisodeSeeder extends Seeder
 {
-<<<<<<< HEAD
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        \DB::table('episodes')->insert([
-=======
     public function run(): void
     {
         $episodes = [
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
             [
                 'title' => 'Lorem Ipsum Dolor',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                 'duration' => 2732, // 45:32
                 'published_at' => '2024-01-15',
                 'show_id' => 1,
-<<<<<<< HEAD
-                'created_at' => now(),
-                'updated_at' => now(),
-=======
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
             ],
             [
                 'title' => 'Consectetur Adipiscing',
@@ -41,11 +23,6 @@ class EpisodeSeeder extends Seeder
                 'duration' => 2301, // 38:21
                 'published_at' => '2024-01-12',
                 'show_id' => 2,
-<<<<<<< HEAD
-                'created_at' => now(),
-                'updated_at' => now(),
-=======
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
             ],
             [
                 'title' => 'Sed Do Eiusmod',
@@ -53,11 +30,6 @@ class EpisodeSeeder extends Seeder
                 'duration' => 3138, // 52:18
                 'published_at' => '2024-01-10',
                 'show_id' => 3,
-<<<<<<< HEAD
-                'created_at' => now(),
-                'updated_at' => now(),
-=======
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
             ],
             [
                 'title' => 'Tempor Incididunt',
@@ -65,11 +37,6 @@ class EpisodeSeeder extends Seeder
                 'duration' => 2505, // 41:45
                 'published_at' => '2024-01-08',
                 'show_id' => 1,
-<<<<<<< HEAD
-                'created_at' => now(),
-                'updated_at' => now(),
-=======
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
             ],
             [
                 'title' => 'Ut Labore Dolore',
@@ -77,11 +44,6 @@ class EpisodeSeeder extends Seeder
                 'duration' => 2172, // 36:12
                 'published_at' => '2024-01-05',
                 'show_id' => 2,
-<<<<<<< HEAD
-                'created_at' => now(),
-                'updated_at' => now(),
-=======
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
             ],
             [
                 'title' => 'Magna Aliqua',
@@ -89,18 +51,11 @@ class EpisodeSeeder extends Seeder
                 'duration' => 2913, // 48:33
                 'published_at' => '2024-01-03',
                 'show_id' => 3,
-<<<<<<< HEAD
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
-=======
             ],
         ];
 
         foreach ($episodes as $episode) {
             Episode::create($episode);
         }
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
     }
 }
