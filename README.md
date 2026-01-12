@@ -100,9 +100,10 @@ A Laravel-based web radio application.
 
 ### Development
 
-**Option 1: Use the development script (Windows):**
+**Option 1: Use the polyrepo development script (Linux):**
 ```bash
-dev.bat
+# From the polyrepo root (/home/joshua/Documents)
+./manage-all-projects.sh start
 ```
 
 **Option 2: Run services manually:**

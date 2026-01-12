@@ -71,6 +71,7 @@
 - [ ] Write deployment guide
 - [ ] Document database schema
 - [ ] Create contributing guidelines
+- [x] Update documentation to reflect Linux backend setup
 
 ---
 
