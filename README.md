@@ -1,12 +1,5 @@
 # Velvet Radio
 
-<<<<<<< HEAD
-A Laravel-based web radio application.
-
-## Setup
-
-1. Install dependencies:
-=======
 🎙️ A modern Laravel-based web radio application featuring server-side rendering with Inertia.js and React.
 
 ## 🚀 Tech Stack
@@ -17,12 +10,12 @@ A Laravel-based web radio application.
 - **Styling:** Tailwind CSS
 - **Build Tool:** Vite with SSR support
 - **Testing:** PHPUnit
-- **Deployment:** Laravel Forge ready
+- **Deployment:** Hypervisor ready (AWS EC2 production, Ubuntu VM test server)
 
 ## 📋 Features
 
 - **Radio Models:** Shows, Hosts, and Episodes with full relationships
-- **Server-Side Rendering:** Fast initial page loads with SSR (port 13716)
+- **Server-Side Rendering:** Fast initial page loads with SSR (production port 13719, test port 13718)
 - **Responsive Design:** Mobile-first design with Tailwind CSS
 - **SEO Optimized:** Sitemap generation and robots.txt configuration
 - **Type Safety:** Full TypeScript support on frontend
@@ -47,35 +40,16 @@ A Laravel-based web radio application.
    ```
 
 2. **Install dependencies:**
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
    ```bash
    composer install
    npm install
    ```
 
-<<<<<<< HEAD
-2. Configure environment:
-=======
 3. **Configure environment:**
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
    ```bash
    cp .env.example .env
    php artisan key:generate
    ```
-<<<<<<< HEAD
-
-3. Run the application:
-   ```bash
-   php artisan serve
-   npm run dev
-   ```
-
-## Features
-
-- Web radio streaming
-- Custom CSS with Tailwind integration
-- Dark mode support
-=======
    
    Update `.env` with your database credentials:
    ```env
@@ -144,20 +118,26 @@ php artisan test --testsuite=Unit
 
 ## 🚢 Deployment
 
-### Laravel Forge
+### Hypervisor Deployment
 
-Use the included deployment script:
+Use the included deployment scripts:
 
+**Production deployment (AWS EC2):**
 ```bash
-./deploy-forge.sh
+./deploy-production.sh
 ```
 
-The script handles:
+**Test server deployment (Ubuntu VM):**
+```bash
+./deploy-test.sh
+```
+
+The scripts handle:
 - Dependency installation
 - Database migrations with safety checks
 - Asset compilation
 - Cache clearing
-- SSR process management
+- SSR process management via PM2
 
 ### Manual Deployment
 
@@ -201,7 +181,12 @@ database/
 
 ### SSR Port
 
-The application uses port **13716** for server-side rendering. Configure in `vite.config.ts`:
+The application uses different ports for server-side rendering:
+- **Production:** Port 13719
+- **Test Server:** Port 13718
+- **Development:** Port 8087
+
+Configure in `vite.config.ts`:
 
 ```typescript
 ssr: {
@@ -235,4 +220,3 @@ This is a private project. For inquiries, contact Joshua Ackerly.
 
 **Developed by:** Joshua Ackerly  
 **Organization:** Graveyard Jokes Studios Inc.
->>>>>>> 066b93697d9d31956048c70e4de461df773e1caa
