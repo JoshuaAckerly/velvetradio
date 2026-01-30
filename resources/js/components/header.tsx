@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { Link } from '@inertiajs/react';
+import { getLoginUrl } from '../env';
 
 const Header: React.FC = () => {
     return (
@@ -15,7 +17,7 @@ const Header: React.FC = () => {
                         <li><Link href="/shows" className="hover:text-[#4a3d5c] transition-colors">Shows</Link></li>
                         <li><Link href="/hosts" className="hover:text-[#4a3d5c] transition-colors">Hosts</Link></li>
                         <li><Link href="/episodes" className="hover:text-[#4a3d5c] transition-colors">Episodes</Link></li>
-                        <li><a href="http://localhost:8007/login" className="hover:text-[#4a3d5c] transition-colors">Login</a></li>
+                        <li><a href={getLoginUrl('velvetradio')} className="hover:text-[#4a3d5c] transition-colors">Login</a></li>
                     </ul>
                 </nav>
             </div>

@@ -1,7 +1,7 @@
+
 import React from "react";
 import Main from "@/layouts/main";
-
-
+import { getProjectUrl } from '../env';
 const cdn = import.meta.env.VITE_ASSET_URL;
 
 const Welcome: React.FC = () => {
@@ -23,7 +23,7 @@ const Welcome: React.FC = () => {
                 <div className="relative z-10 py-24 text-center px-4">
                     <h2 className="mb-2 text-5xl font-bold drop-shadow-lg">Velvet Radio</h2>
                     <p className="mb-6 text-lg drop-shadow-md max-w-2xl mx-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
-                    <button className="rounded-lg bg-[#4a3d5c] px-6 py-3 font-medium text-white hover:bg-[#5c4a70] shadow-lg transition-all hover:shadow-xl">Listen Now</button>
+                    <a href={getProjectUrl('velvetradio')} className="rounded-lg bg-[#4a3d5c] px-6 py-3 font-medium text-white hover:bg-[#5c4a70] shadow-lg transition-all hover:shadow-xl">Listen Now</a>
                 </div>
             </section>
 
