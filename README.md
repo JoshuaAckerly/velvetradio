@@ -77,7 +77,7 @@
 **Option 1: Use the polyrepo development script (Linux):**
 ```bash
 # From the polyrepo root (/home/joshua/Documents)
-./manage-all-projects.sh start
+./scripts/manage-all-projects.sh start
 ```
 
 **Option 2: Run services manually:**
