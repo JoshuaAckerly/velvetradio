@@ -130,6 +130,14 @@
 
         <link rel="icon" href="/favicon.ico" sizes="any">
 
+        @php
+            $host = rtrim((string) request()->getSchemeAndHttpHost(), '/');
+            $path = request()->path();
+            $canonical = $host . ($path === '/' || $path === '' ? '/' : '/' . ltrim($path, '/'));
+        @endphp
+
+        <link rel="canonical" href="{{ $canonical }}">
+
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
