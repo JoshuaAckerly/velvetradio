@@ -11,13 +11,12 @@ Route::get('/', function () {
 Route::get('/shows', function () {
     $shows = DB::table('shows')
         ->leftJoin('hosts', 'shows.id', '=', 'hosts.show_id')
-        ->leftJoin('episodes', 'shows.id', '=', 'episodes.show_id')
         ->select(
             'shows.id',
             'shows.title',
             'shows.description',
             'hosts.name as host_name',
-            DB::raw('COUNT(episodes.id) as episode_count')
+            DB::raw('(SELECT COUNT(*) FROM episodes WHERE episodes.show_id = shows.id) as episode_count')
         )
         ->where('shows.active', true)
         ->groupBy('shows.id', 'shows.title', 'shows.description', 'hosts.name')
