@@ -5,7 +5,7 @@
 set -e
 
 # Configuration
-SSR_PORT=13719
+SSR_PORT=13718
 PROJECT_NAME="velvetradio"
 DEPLOY_PATH="/var/www/velvetradio"
 PHP_VERSION="8.3"
