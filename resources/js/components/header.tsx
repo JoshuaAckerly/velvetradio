@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from '@inertiajs/react';
+import MobileMenu from '@/components/MobileMenu';
 import { getLoginUrl } from '../env';
 
 const Header: React.FC = () => {
@@ -11,8 +12,9 @@ const Header: React.FC = () => {
                     <Link href="/" aria-label="Velvet Radio Home" className="text-2xl font-semibold">Velvet Radio</Link>
                 </div>
 
-                <nav className="flex-1" aria-label="Main navigation">
-                    <ul className="flex gap-6 justify-end items-center text-base">
+                {/* Desktop nav */}
+                <nav className="hidden md:flex flex-1" aria-label="Main navigation">
+                    <ul className="flex gap-6 justify-end items-center text-base w-full">
                         <li><Link href="/" className="hover:text-[#4a3d5c] transition-colors">Home</Link></li>
                         <li><Link href="/shows" className="hover:text-[#4a3d5c] transition-colors">Shows</Link></li>
                         <li><Link href="/hosts" className="hover:text-[#4a3d5c] transition-colors">Hosts</Link></li>
@@ -20,6 +22,11 @@ const Header: React.FC = () => {
                         <li><a href={getLoginUrl('velvetradio')} className="hover:text-[#4a3d5c] transition-colors">Login</a></li>
                     </ul>
                 </nav>
+
+                {/* Mobile nav */}
+                <div className="ml-auto md:hidden">
+                    <MobileMenu />
+                </div>
             </div>
         </header>
     );
