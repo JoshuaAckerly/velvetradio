@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import MobileMenu from '@/components/MobileMenu';
+import NotificationBell from '@/components/NotificationBell';
 import { getLoginUrl } from '../env';
 
 const Header: React.FC = () => {
@@ -20,6 +21,7 @@ const Header: React.FC = () => {
                         <li><Link href="/hosts" className="hover:text-[#4a3d5c] transition-colors">Hosts</Link></li>
                         <li><Link href="/episodes" className="hover:text-[#4a3d5c] transition-colors">Episodes</Link></li>
                         <li><a href={getLoginUrl('velvetradio')} className="hover:text-[#4a3d5c] transition-colors">Login</a></li>
+                        <li><NotificationBell /></li>
                     </ul>
                 </nav>
 
