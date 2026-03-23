@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -33,7 +33,7 @@ Route::get('/shows', function () {
         });
 
     return Inertia::render('shows', [
-        'shows' => $shows
+        'shows' => $shows,
     ]);
 })->name('shows');
 
@@ -61,7 +61,7 @@ Route::get('/hosts', function () {
         });
 
     return Inertia::render('hosts', [
-        'hosts' => $hosts
+        'hosts' => $hosts,
     ]);
 })->name('hosts');
 
@@ -93,7 +93,7 @@ Route::get('/episodes', function () {
         });
 
     return Inertia::render('episodes', [
-        'episodes' => $episodes
+        'episodes' => $episodes,
     ]);
 })->name('episodes');
 

@@ -11,13 +11,13 @@ class Show extends Model
 
     protected $fillable = [
         'title',
-        'description', 
+        'description',
         'slug',
-        'active'
+        'active',
     ];
 
     protected $casts = [
-        'active' => 'boolean'
+        'active' => 'boolean',
     ];
 
     public function hosts()

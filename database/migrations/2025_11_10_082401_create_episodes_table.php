@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('episodes')) {
+        if (! Schema::hasTable('episodes')) {
             Schema::create('episodes', function (Blueprint $table) {
                 $table->id();
                 $table->string('title');
@@ -21,7 +21,7 @@ return new class extends Migration
                 $table->date('published_at');
                 $table->foreignId('show_id')->constrained()->onDelete('cascade');
                 $table->timestamps();
-                
+
                 $table->index('published_at');
                 $table->index('show_id');
             });
