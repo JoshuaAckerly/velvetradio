@@ -14,12 +14,12 @@ class Episode extends Model
         'description',
         'duration',
         'published_at',
-        'show_id'
+        'show_id',
     ];
 
     protected $casts = [
         'published_at' => 'date',
-        'duration' => 'integer'
+        'duration' => 'integer',
     ];
 
     public function show()
@@ -31,6 +31,7 @@ class Episode extends Model
     {
         $minutes = floor($this->duration / 60);
         $seconds = $this->duration % 60;
+
         return sprintf('%d:%02d', $minutes, $seconds);
     }
 }

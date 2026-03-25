@@ -13,6 +13,6 @@ class DatabaseTest extends TestCase
 
     public function test_string_operations(): void
     {
-        $this->assertEquals('Velvet Radio', 'Velvet' . ' ' . 'Radio');
+        $this->assertEquals('Velvet Radio', 'Velvet'.' '.'Radio');
     }
 }

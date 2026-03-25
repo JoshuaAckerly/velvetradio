@@ -1,5 +1,5 @@
-import React from "react";
-import Main from "@/layouts/main";
+import Main from '@/layouts/main';
+import React from 'react';
 
 interface Host {
     id: number;
@@ -14,28 +14,25 @@ interface HostsProps {
 }
 
 const Hosts: React.FC<HostsProps> = ({ hosts }) => {
-
     return (
         <Main>
-            <div className="bg-[#0f0f0f] min-h-screen text-white">
-                <section className="bg-[#2d3a1f] py-12 text-center border-b border-gray-700">
-                    <h1 className="text-4xl font-bold mb-4">Hosts</h1>
+            <div className="min-h-screen bg-[#0f0f0f] text-white">
+                <section className="border-b border-gray-700 bg-[#2d3a1f] py-12 text-center">
+                    <h1 className="mb-4 text-4xl font-bold">Hosts</h1>
                     <p className="text-lg text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                 </section>
 
                 <section className="px-6 py-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                         {hosts.map((host: Host) => (
-                            <div key={host.id} className="bg-[#1a1a1a] rounded-lg p-6 text-center shadow-lg">
-                                <div className="w-24 h-24 bg-[#4a3d5c] rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+                            <div key={host.id} className="rounded-lg bg-[#1a1a1a] p-6 text-center shadow-lg">
+                                <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-[#4a3d5c] text-2xl font-bold">
                                     {host.avatar}
                                 </div>
-                                <h3 className="text-xl font-semibold mb-2">{host.name}</h3>
-                                <p className="text-[#4a3d5c] font-medium mb-4">Host of {host.show}</p>
-                                <p className="text-gray-300 mb-6">{host.bio}</p>
-                                <button className="bg-[#4a3d5c] hover:bg-[#5c4a70] px-6 py-2 rounded-lg text-white">
-                                    View Profile
-                                </button>
+                                <h3 className="mb-2 text-xl font-semibold">{host.name}</h3>
+                                <p className="mb-4 font-medium text-[#4a3d5c]">Host of {host.show}</p>
+                                <p className="mb-6 text-gray-300">{host.bio}</p>
+                                <button className="rounded-lg bg-[#4a3d5c] px-6 py-2 text-white hover:bg-[#5c4a70]">View Profile</button>
                             </div>
                         ))}
                     </div>

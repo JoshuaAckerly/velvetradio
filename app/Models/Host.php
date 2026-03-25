@@ -13,7 +13,7 @@ class Host extends Model
         'name',
         'bio',
         'avatar',
-        'show_id'
+        'show_id',
     ];
 
     public function show()

@@ -1,7 +1,5 @@
 @import 'tailwindcss';
 
-
-
 :root {
     --background: oklch(0.5904 0.053 316.08);
     --foreground: oklch(0.8573 0.18 123.95);
@@ -155,5 +153,7 @@
 }
 
 @layer utilities {
-    .muted { color: var(--muted-foreground); }
+    .muted {
+        color: var(--muted-foreground);
+    }
 }

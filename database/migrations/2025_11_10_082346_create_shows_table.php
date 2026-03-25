@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('shows')) {
+        if (! Schema::hasTable('shows')) {
             Schema::create('shows', function (Blueprint $table) {
                 $table->id();
                 $table->string('title');
@@ -19,7 +19,7 @@ return new class extends Migration
                 $table->string('slug')->unique();
                 $table->boolean('active')->default(true);
                 $table->timestamps();
-                
+
                 $table->index('active');
             });
         }
