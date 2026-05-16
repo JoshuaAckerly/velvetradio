@@ -30,7 +30,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, showName }) => {
         setDuration(0);
         if (src) {
             audio.load();
-            audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+            audio
+                .play()
+                .then(() => setIsPlaying(true))
+                .catch(() => setIsPlaying(false));
         } else {
             setIsPlaying(false);
         }
@@ -74,7 +77,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, showName }) => {
     if (!src) return null;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#3a3a3a] bg-[#1a1a1a] px-4 py-3 shadow-2xl">
+        <div className="fixed right-0 bottom-0 left-0 z-50 border-t border-[#3a3a3a] bg-[#1a1a1a] px-4 py-3 shadow-2xl">
             <audio
                 ref={audioRef}
                 src={src}
@@ -104,7 +107,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, showName }) => {
 
                 {/* Seek bar + timestamps */}
                 <div className="hidden flex-1 items-center gap-2 sm:flex">
-                    <span className="shrink-0 text-xs tabular-nums text-gray-400">{formatTime(currentTime)}</span>
+                    <span className="shrink-0 text-xs text-gray-400 tabular-nums">{formatTime(currentTime)}</span>
                     <input
                         type="range"
                         min={0}
@@ -115,7 +118,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, showName }) => {
                         aria-label="Seek"
                         className="h-1 w-full cursor-pointer accent-[#4a3d5c]"
                     />
-                    <span className="shrink-0 text-xs tabular-nums text-gray-400">{formatTime(duration)}</span>
+                    <span className="shrink-0 text-xs text-gray-400 tabular-nums">{formatTime(duration)}</span>
                 </div>
 
                 {/* Volume */}

@@ -90,7 +90,7 @@ Route::get('/episodes', function () {
                 'host' => $episode->host_name,
                 'duration' => gmdate('i:s', $episode->duration),
                 'date' => $episode->published_at,
-                'audio_url' => $episode->audio_file ? asset('storage/' . $episode->audio_file) : null,
+                'audio_url' => $episode->audio_file ? asset('storage/'.$episode->audio_file) : null,
             ];
         });
 

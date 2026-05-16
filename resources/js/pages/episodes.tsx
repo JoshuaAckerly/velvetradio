@@ -69,9 +69,7 @@ const Episodes: React.FC<EpisodesProps> = ({ episodes }) => {
                 </section>
             </div>
 
-            {activeTrack && (
-                <AudioPlayer src={activeTrack.src} title={activeTrack.title} showName={activeTrack.showName} />
-            )}
+            {activeTrack && <AudioPlayer src={activeTrack.src} title={activeTrack.title} showName={activeTrack.showName} />}
         </Main>
     );
 };
