@@ -1,5 +1,6 @@
+import AudioPlayer from '@/components/AudioPlayer';
 import Main from '@/layouts/main';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface Episode {
     id: number;
@@ -8,6 +9,13 @@ interface Episode {
     host: string;
     duration: string;
     date: string;
+    audio_url: string | null;
+}
+
+interface ActiveTrack {
+    src: string;
+    title: string;
+    showName: string;
 }
 
 interface EpisodesProps {
@@ -15,9 +23,20 @@ interface EpisodesProps {
 }
 
 const Episodes: React.FC<EpisodesProps> = ({ episodes }) => {
+    const [activeTrack, setActiveTrack] = useState<ActiveTrack | null>(null);
+
+    const handlePlay = (episode: Episode) => {
+        if (!episode.audio_url) return;
+        setActiveTrack({
+            src: episode.audio_url,
+            title: episode.title,
+            showName: episode.show,
+        });
+    };
+
     return (
         <Main>
-            <div className="min-h-screen bg-[#0f0f0f] text-white">
+            <div className="min-h-screen bg-[#0f0f0f] pb-20 text-white">
                 <section className="border-b border-gray-700 bg-[#2d3a1f] py-12 text-center">
                     <h1 className="mb-4 text-4xl font-bold">Episodes</h1>
                     <p className="text-lg text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
@@ -36,12 +55,23 @@ const Episodes: React.FC<EpisodesProps> = ({ episodes }) => {
                                         {episode.date} • {episode.duration}
                                     </p>
                                 </div>
-                                <button className="ml-4 rounded-lg bg-[#4a3d5c] px-6 py-2 text-white hover:bg-[#5c4a70]">Play</button>
+                                <button
+                                    className="ml-4 rounded-lg bg-[#4a3d5c] px-6 py-2 text-white hover:bg-[#5c4a70] disabled:cursor-not-allowed disabled:opacity-40"
+                                    onClick={() => handlePlay(episode)}
+                                    disabled={!episode.audio_url}
+                                    aria-label={`Play ${episode.title}`}
+                                >
+                                    Play
+                                </button>
                             </div>
                         ))}
                     </div>
                 </section>
             </div>
+
+            {activeTrack && (
+                <AudioPlayer src={activeTrack.src} title={activeTrack.title} showName={activeTrack.showName} />
+            )}
         </Main>
     );
 };

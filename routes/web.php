@@ -74,6 +74,7 @@ Route::get('/episodes', function () {
             'episodes.title',
             'episodes.duration',
             'episodes.published_at',
+            'episodes.audio_file',
             'shows.title as show_title',
             'hosts.name as host_name'
         )
@@ -89,6 +90,7 @@ Route::get('/episodes', function () {
                 'host' => $episode->host_name,
                 'duration' => gmdate('i:s', $episode->duration),
                 'date' => $episode->published_at,
+                'audio_url' => $episode->audio_file ? asset('storage/' . $episode->audio_file) : null,
             ];
         });
 
