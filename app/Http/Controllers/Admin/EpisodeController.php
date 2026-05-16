@@ -25,19 +25,19 @@ class EpisodeController extends Controller
     {
         return Inertia::render('admin/episodes/form', [
             'episode' => null,
-            'shows'   => Show::orderBy('title')->get(['id', 'title']),
+            'shows' => Show::orderBy('title')->get(['id', 'title']),
         ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'title'        => 'required|string|max:255',
-            'description'  => 'nullable|string',
-            'show_id'      => 'required|integer|exists:shows,id',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'show_id' => 'required|integer|exists:shows,id',
             'published_at' => 'required|date',
-            'duration'     => 'nullable|integer|min:0',
-            'audio_file'   => 'nullable|file|mimes:mp3,wav,ogg,aac,m4a|max:204800',
+            'duration' => 'nullable|integer|min:0',
+            'audio_file' => 'nullable|file|mimes:mp3,wav,ogg,aac,m4a|max:204800',
         ]);
 
         if ($request->hasFile('audio_file')) {
@@ -55,19 +55,19 @@ class EpisodeController extends Controller
     {
         return Inertia::render('admin/episodes/form', [
             'episode' => $episode,
-            'shows'   => Show::orderBy('title')->get(['id', 'title']),
+            'shows' => Show::orderBy('title')->get(['id', 'title']),
         ]);
     }
 
     public function update(Request $request, Episode $episode): RedirectResponse
     {
         $data = $request->validate([
-            'title'        => 'required|string|max:255',
-            'description'  => 'nullable|string',
-            'show_id'      => 'required|integer|exists:shows,id',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'show_id' => 'required|integer|exists:shows,id',
             'published_at' => 'required|date',
-            'duration'     => 'nullable|integer|min:0',
-            'audio_file'   => 'nullable|file|mimes:mp3,wav,ogg,aac,m4a|max:204800',
+            'duration' => 'nullable|integer|min:0',
+            'audio_file' => 'nullable|file|mimes:mp3,wav,ogg,aac,m4a|max:204800',
         ]);
 
         if ($request->hasFile('audio_file')) {

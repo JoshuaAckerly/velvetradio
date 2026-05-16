@@ -23,15 +23,14 @@ interface HostFormProps {
 const HostForm: React.FC<HostFormProps> = ({ host, shows }) => {
     const editing = host !== null;
     const [form, setForm] = useState({
-        name:    host?.name ?? '',
-        bio:     host?.bio ?? '',
-        avatar:  host?.avatar ?? '',
-        show_id: host?.show_id ?? (shows[0]?.id ?? ''),
+        name: host?.name ?? '',
+        bio: host?.bio ?? '',
+        avatar: host?.avatar ?? '',
+        show_id: host?.show_id ?? shows[0]?.id ?? '',
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
 
-    const set = (field: string, value: string | number) =>
-        setForm((prev) => ({ ...prev, [field]: value }));
+    const set = (field: string, value: string | number) => setForm((prev) => ({ ...prev, [field]: value }));
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -62,7 +61,11 @@ const HostForm: React.FC<HostFormProps> = ({ host, shows }) => {
                 <div>
                     <label className="mb-1 block text-sm font-medium">Show</label>
                     <select value={form.show_id} onChange={(e) => set('show_id', e.target.value)} className="admin-input" required>
-                        {shows.map((s) => <option key={s.id} value={s.id}>{s.title}</option>)}
+                        {shows.map((s) => (
+                            <option key={s.id} value={s.id}>
+                                {s.title}
+                            </option>
+                        ))}
                     </select>
                     {errors.show_id && <p className="mt-1 text-sm text-red-400">{errors.show_id}</p>}
                 </div>
@@ -74,10 +77,23 @@ const HostForm: React.FC<HostFormProps> = ({ host, shows }) => {
 
                 <div>
                     <label className="mb-1 block text-sm font-medium">Avatar URL</label>
-                    <input type="url" value={form.avatar} onChange={(e) => set('avatar', e.target.value)} className="admin-input" placeholder="https://…" />
+                    <input
+                        type="url"
+                        value={form.avatar}
+                        onChange={(e) => set('avatar', e.target.value)}
+                        className="admin-input"
+                        placeholder="https://…"
+                    />
                     {errors.avatar && <p className="mt-1 text-sm text-red-400">{errors.avatar}</p>}
                     {form.avatar && (
-                        <img src={form.avatar} alt="Preview" className="mt-2 h-12 w-12 rounded-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                        <img
+                            src={form.avatar}
+                            alt="Preview"
+                            className="mt-2 h-12 w-12 rounded-full object-cover"
+                            onError={(e) => {
+                                (e.target as HTMLImageElement).style.display = 'none';
+                            }}
+                        />
                     )}
                 </div>
 
@@ -85,7 +101,11 @@ const HostForm: React.FC<HostFormProps> = ({ host, shows }) => {
                     <button type="submit" className="rounded bg-[#4a3d5c] px-6 py-2 font-medium text-white hover:bg-[#5c4a70]">
                         {editing ? 'Update Host' : 'Create Host'}
                     </button>
-                    <button type="button" onClick={() => router.visit('/admin/hosts')} className="rounded border border-[#3a3a3a] px-6 py-2 text-sm hover:border-white">
+                    <button
+                        type="button"
+                        onClick={() => router.visit('/admin/hosts')}
+                        className="rounded border border-[#3a3a3a] px-6 py-2 text-sm hover:border-white"
+                    >
                         Cancel
                     </button>
                 </div>

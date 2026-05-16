@@ -29,10 +29,10 @@ class ShowController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'title'       => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'slug'        => 'required|string|max:255|unique:shows,slug|alpha_dash',
-            'active'      => 'boolean',
+            'slug' => 'required|string|max:255|unique:shows,slug|alpha_dash',
+            'active' => 'boolean',
         ]);
 
         Show::create($data);
@@ -48,10 +48,10 @@ class ShowController extends Controller
     public function update(Request $request, Show $show): RedirectResponse
     {
         $data = $request->validate([
-            'title'       => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'slug'        => 'required|string|max:255|alpha_dash|unique:shows,slug,' . $show->id,
-            'active'      => 'boolean',
+            'slug' => 'required|string|max:255|alpha_dash|unique:shows,slug,'.$show->id,
+            'active' => 'boolean',
         ]);
 
         $show->update($data);

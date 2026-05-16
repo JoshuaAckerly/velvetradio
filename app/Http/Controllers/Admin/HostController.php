@@ -24,7 +24,7 @@ class HostController extends Controller
     public function create(): Response
     {
         return Inertia::render('admin/hosts/form', [
-            'host'  => null,
+            'host' => null,
             'shows' => Show::orderBy('title')->get(['id', 'title']),
         ]);
     }
@@ -32,9 +32,9 @@ class HostController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'name'    => 'required|string|max:255',
-            'bio'     => 'nullable|string',
-            'avatar'  => 'nullable|url|max:500',
+            'name' => 'required|string|max:255',
+            'bio' => 'nullable|string',
+            'avatar' => 'nullable|url|max:500',
             'show_id' => 'required|integer|exists:shows,id',
         ]);
 
@@ -46,7 +46,7 @@ class HostController extends Controller
     public function edit(Host $host): Response
     {
         return Inertia::render('admin/hosts/form', [
-            'host'  => $host,
+            'host' => $host,
             'shows' => Show::orderBy('title')->get(['id', 'title']),
         ]);
     }
@@ -54,9 +54,9 @@ class HostController extends Controller
     public function update(Request $request, Host $host): RedirectResponse
     {
         $data = $request->validate([
-            'name'    => 'required|string|max:255',
-            'bio'     => 'nullable|string',
-            'avatar'  => 'nullable|url|max:500',
+            'name' => 'required|string|max:255',
+            'bio' => 'nullable|string',
+            'avatar' => 'nullable|url|max:500',
             'show_id' => 'required|integer|exists:shows,id',
         ]);
 

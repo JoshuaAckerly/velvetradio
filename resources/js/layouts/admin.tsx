@@ -11,10 +11,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ title, children }) => (
     <MainLayout>
         <div className="mx-auto max-w-5xl">
             <div className="mb-6 flex items-center gap-2 text-sm text-[var(--muted-foreground,#888)]">
-                <button
-                    onClick={() => router.visit('/admin')}
-                    className="transition-colors hover:text-white"
-                >
+                <button onClick={() => router.visit('/admin')} className="transition-colors hover:text-white">
                     Admin
                 </button>
                 <span>/</span>

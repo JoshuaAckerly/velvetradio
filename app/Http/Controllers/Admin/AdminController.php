@@ -15,9 +15,9 @@ class AdminController extends Controller
     {
         return Inertia::render('admin/index', [
             'counts' => [
-                'shows'    => Show::count(),
+                'shows' => Show::count(),
                 'episodes' => Episode::count(),
-                'hosts'    => Host::count(),
+                'hosts' => Host::count(),
             ],
         ]);
     }

@@ -25,18 +25,17 @@ interface EpisodeFormProps {
 const EpisodeForm: React.FC<EpisodeFormProps> = ({ episode, shows }) => {
     const editing = episode !== null;
     const [form, setForm] = useState({
-        title:        episode?.title ?? '',
-        description:  episode?.description ?? '',
-        show_id:      episode?.show_id ?? (shows[0]?.id ?? ''),
+        title: episode?.title ?? '',
+        description: episode?.description ?? '',
+        show_id: episode?.show_id ?? shows[0]?.id ?? '',
         published_at: episode?.published_at ?? new Date().toISOString().slice(0, 10),
-        duration:     episode?.duration?.toString() ?? '',
+        duration: episode?.duration?.toString() ?? '',
     });
     const [audioFile, setAudioFile] = useState<File | null>(null);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const fileRef = useRef<HTMLInputElement>(null);
 
-    const set = (field: string, value: string | number) =>
-        setForm((prev) => ({ ...prev, [field]: value }));
+    const set = (field: string, value: string | number) => setForm((prev) => ({ ...prev, [field]: value }));
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -68,7 +67,11 @@ const EpisodeForm: React.FC<EpisodeFormProps> = ({ episode, shows }) => {
                 <div>
                     <label className="mb-1 block text-sm font-medium">Show</label>
                     <select value={form.show_id} onChange={(e) => set('show_id', e.target.value)} className="admin-input" required>
-                        {shows.map((s) => <option key={s.id} value={s.id}>{s.title}</option>)}
+                        {shows.map((s) => (
+                            <option key={s.id} value={s.id}>
+                                {s.title}
+                            </option>
+                        ))}
                     </select>
                     {errors.show_id && <p className="mt-1 text-sm text-red-400">{errors.show_id}</p>}
                 </div>
@@ -81,12 +84,25 @@ const EpisodeForm: React.FC<EpisodeFormProps> = ({ episode, shows }) => {
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="mb-1 block text-sm font-medium">Published Date</label>
-                        <input type="date" value={form.published_at} onChange={(e) => set('published_at', e.target.value)} className="admin-input" required />
+                        <input
+                            type="date"
+                            value={form.published_at}
+                            onChange={(e) => set('published_at', e.target.value)}
+                            className="admin-input"
+                            required
+                        />
                         {errors.published_at && <p className="mt-1 text-sm text-red-400">{errors.published_at}</p>}
                     </div>
                     <div>
                         <label className="mb-1 block text-sm font-medium">Duration (seconds)</label>
-                        <input type="number" value={form.duration} onChange={(e) => set('duration', e.target.value)} className="admin-input" min={0} placeholder="e.g. 3600" />
+                        <input
+                            type="number"
+                            value={form.duration}
+                            onChange={(e) => set('duration', e.target.value)}
+                            className="admin-input"
+                            min={0}
+                            placeholder="e.g. 3600"
+                        />
                     </div>
                 </div>
 
@@ -113,7 +129,11 @@ const EpisodeForm: React.FC<EpisodeFormProps> = ({ episode, shows }) => {
                     <button type="submit" className="rounded bg-[#4a3d5c] px-6 py-2 font-medium text-white hover:bg-[#5c4a70]">
                         {editing ? 'Update Episode' : 'Create Episode'}
                     </button>
-                    <button type="button" onClick={() => router.visit('/admin/episodes')} className="rounded border border-[#3a3a3a] px-6 py-2 text-sm hover:border-white">
+                    <button
+                        type="button"
+                        onClick={() => router.visit('/admin/episodes')}
+                        className="rounded border border-[#3a3a3a] px-6 py-2 text-sm hover:border-white"
+                    >
                         Cancel
                     </button>
                 </div>
