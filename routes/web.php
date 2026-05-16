@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\EpisodeController as AdminEpisodeController;
+use App\Http\Controllers\Admin\HostController as AdminHostController;
+use App\Http\Controllers\Admin\ShowController as AdminShowController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -100,3 +104,30 @@ Route::get('/episodes', function () {
 })->name('episodes');
 
 require __DIR__.'/settings.php';
+
+// Admin panel — requires authenticated user
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+
+    Route::get('/shows', [AdminShowController::class, 'index'])->name('shows.index');
+    Route::get('/shows/create', [AdminShowController::class, 'create'])->name('shows.create');
+    Route::post('/shows', [AdminShowController::class, 'store'])->name('shows.store');
+    Route::get('/shows/{show}/edit', [AdminShowController::class, 'edit'])->name('shows.edit');
+    Route::put('/shows/{show}', [AdminShowController::class, 'update'])->name('shows.update');
+    Route::delete('/shows/{show}', [AdminShowController::class, 'destroy'])->name('shows.destroy');
+    Route::post('/shows/slug', [AdminShowController::class, 'generateSlug'])->name('shows.slug');
+
+    Route::get('/episodes', [AdminEpisodeController::class, 'index'])->name('episodes.index');
+    Route::get('/episodes/create', [AdminEpisodeController::class, 'create'])->name('episodes.create');
+    Route::post('/episodes', [AdminEpisodeController::class, 'store'])->name('episodes.store');
+    Route::get('/episodes/{episode}/edit', [AdminEpisodeController::class, 'edit'])->name('episodes.edit');
+    Route::put('/episodes/{episode}', [AdminEpisodeController::class, 'update'])->name('episodes.update');
+    Route::delete('/episodes/{episode}', [AdminEpisodeController::class, 'destroy'])->name('episodes.destroy');
+
+    Route::get('/hosts', [AdminHostController::class, 'index'])->name('hosts.index');
+    Route::get('/hosts/create', [AdminHostController::class, 'create'])->name('hosts.create');
+    Route::post('/hosts', [AdminHostController::class, 'store'])->name('hosts.store');
+    Route::get('/hosts/{host}/edit', [AdminHostController::class, 'edit'])->name('hosts.edit');
+    Route::put('/hosts/{host}', [AdminHostController::class, 'update'])->name('hosts.update');
+    Route::delete('/hosts/{host}', [AdminHostController::class, 'destroy'])->name('hosts.destroy');
+});

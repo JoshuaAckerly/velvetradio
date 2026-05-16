@@ -14,6 +14,7 @@ class Episode extends Model
         'description',
         'duration',
         'published_at',
+        'audio_file',
         'show_id',
     ];
 
