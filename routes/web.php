@@ -103,6 +103,10 @@ Route::get('/episodes', function () {
     ]);
 })->name('episodes');
 
+Route::get('/listen', function () {
+    return Inertia::render('listen');
+})->name('listen');
+
 require __DIR__.'/settings.php';
 
 // Admin panel — requires authenticated user

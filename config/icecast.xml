@@ -1,0 +1,74 @@
+<icecast>
+    <location>Buffalo, NY</location>
+    <admin>admin@velvetradio.graveyardjokes.com</admin>
+
+    <limits>
+        <clients>500</clients>
+        <sources>2</sources>
+        <queue-size>524288</queue-size>
+        <client-timeout>30</client-timeout>
+        <header-timeout>15</header-timeout>
+        <source-timeout>10</source-timeout>
+        <burst-on-connect>1</burst-on-connect>
+        <burst-size>65536</burst-size>
+    </limits>
+
+    <authentication>
+        <!-- IMPORTANT: Replace placeholder values before deploying.
+             Do NOT commit actual passwords to version control.
+             Set these via /etc/icecast2/icecast.xml on the server. -->
+        <source-password>CHANGE_ME_SOURCE_PASSWORD</source-password>
+        <relay-password>CHANGE_ME_RELAY_PASSWORD</relay-password>
+        <admin-user>admin</admin-user>
+        <admin-password>CHANGE_ME_ADMIN_PASSWORD</admin-password>
+    </authentication>
+
+    <hostname>velvetradio.graveyardjokes.com</hostname>
+
+    <listen-socket>
+        <port>8000</port>
+        <bind-address>127.0.0.1</bind-address>
+    </listen-socket>
+
+    <!-- /live: primary mount (live DJ or Liquidsoap fallback) -->
+    <mount type="normal">
+        <mount-name>/live</mount-name>
+        <max-listeners>500</max-listeners>
+        <max-listener-duration>0</max-listener-duration>
+        <fallback-mount>/fallback</fallback-mount>
+        <fallback-override>1</fallback-override>
+        <fallback-when-empty>1</fallback-when-empty>
+        <stream-name>Velvet Radio</stream-name>
+        <stream-description>Velvet Radio — Broadcasting from the Studio</stream-description>
+        <stream-url>https://velvetradio.graveyardjokes.com</stream-url>
+        <genre>Electronic / Ambient</genre>
+        <public>0</public>
+    </mount>
+
+    <!-- /fallback: Liquidsoap scheduled playlist -->
+    <mount type="normal">
+        <mount-name>/fallback</mount-name>
+        <max-listeners>500</max-listeners>
+        <stream-name>Velvet Radio (Scheduled)</stream-name>
+        <public>0</public>
+    </mount>
+
+    <paths>
+        <basedir>/usr/share/icecast2</basedir>
+        <logdir>/var/log/icecast2</logdir>
+        <webroot>/usr/share/icecast2/web</webroot>
+        <adminroot>/usr/share/icecast2/admin</adminroot>
+        <pidfile>/var/run/icecast2/icecast2.pid</pidfile>
+    </paths>
+
+    <logging>
+        <accesslog>access.log</accesslog>
+        <errorlog>error.log</errorlog>
+        <loglevel>3</loglevel>
+        <logsize>10000</logsize>
+    </logging>
+
+    <security>
+        <chroot>0</chroot>
+    </security>
+</icecast>

@@ -2,9 +2,10 @@ import { Pause, Play, Volume2, VolumeX } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 
 interface AudioPlayerProps {
-    src: string | null;
+    src?: string | null;
     title: string;
     showName: string;
+    streamUrl?: string;
 }
 
 const formatTime = (seconds: number): string => {
@@ -14,7 +15,9 @@ const formatTime = (seconds: number): string => {
     return `${m}:${s.toString().padStart(2, '0')}`;
 };
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, showName }) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ src = null, title, showName, streamUrl }) => {
+    const isLive = !!streamUrl;
+    const audioSrc = streamUrl ?? src;
     const audioRef = useRef<HTMLAudioElement>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
@@ -22,10 +25,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, showName }) => {
     const [volume, setVolume] = useState(1);
     const [isMuted, setIsMuted] = useState(false);
 
-    // Reset and autoplay when src changes
+    // Episode mode: reset and auto-play on src change. Live streams are user-initiated only.
     useEffect(() => {
         const audio = audioRef.current;
-        if (!audio) return;
+        if (!audio || isLive) return;
         setCurrentTime(0);
         setDuration(0);
         if (src) {
@@ -37,11 +40,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, showName }) => {
         } else {
             setIsPlaying(false);
         }
-    }, [src]);
+    }, [src, streamUrl]);
 
     const togglePlay = () => {
         const audio = audioRef.current;
-        if (!audio || !src) return;
+        if (!audio || !audioSrc) return;
         if (isPlaying) {
             audio.pause();
         } else {
@@ -74,13 +77,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, showName }) => {
         audio.muted = muting;
     };
 
-    if (!src) return null;
+    if (!audioSrc) return null;
 
     return (
         <div className="fixed right-0 bottom-0 left-0 z-50 border-t border-[#3a3a3a] bg-[#1a1a1a] px-4 py-3 shadow-2xl">
             <audio
                 ref={audioRef}
-                src={src}
+                src={audioSrc}
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
                 onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime ?? 0)}
@@ -105,20 +108,28 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, showName }) => {
                     <p className="truncate text-xs text-gray-400">{showName}</p>
                 </div>
 
-                {/* Seek bar + timestamps */}
+                {/* Seek bar + timestamps (episode mode) / LIVE badge (stream mode) */}
                 <div className="hidden flex-1 items-center gap-2 sm:flex">
-                    <span className="shrink-0 text-xs text-gray-400 tabular-nums">{formatTime(currentTime)}</span>
-                    <input
-                        type="range"
-                        min={0}
-                        max={duration || 0}
-                        step={1}
-                        value={currentTime}
-                        onChange={handleSeek}
-                        aria-label="Seek"
-                        className="h-1 w-full cursor-pointer accent-[#4a3d5c]"
-                    />
-                    <span className="shrink-0 text-xs text-gray-400 tabular-nums">{formatTime(duration)}</span>
+                    {isLive ? (
+                        <span className="rounded bg-red-600 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-white">
+                            Live
+                        </span>
+                    ) : (
+                        <>
+                            <span className="shrink-0 text-xs text-gray-400 tabular-nums">{formatTime(currentTime)}</span>
+                            <input
+                                type="range"
+                                min={0}
+                                max={duration || 0}
+                                step={1}
+                                value={currentTime}
+                                onChange={handleSeek}
+                                aria-label="Seek"
+                                className="h-1 w-full cursor-pointer accent-[#4a3d5c]"
+                            />
+                            <span className="shrink-0 text-xs text-gray-400 tabular-nums">{formatTime(duration)}</span>
+                        </>
+                    )}
                 </div>
 
                 {/* Volume */}

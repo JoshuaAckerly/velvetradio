@@ -1,0 +1,31 @@
+[Unit]
+Description=Velvet Radio — Liquidsoap Stream Engine
+Documentation=https://www.liquidsoap.info/
+After=network.target icecast2.service
+Requires=icecast2.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+
+ExecStart=/usr/bin/liquidsoap /var/www/velvetradio/config/radio.liq
+
+# Restart automatically on crash; wait 5s between attempts
+Restart=on-failure
+RestartSec=5s
+
+# Give the process 30s to start up before systemd considers it failed
+TimeoutStartSec=30
+
+# Log to the journal (view with: journalctl -u liquidsoap-velvetradio -f)
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=liquidsoap-velvetradio
+
+# Ensure the log directory exists
+ExecStartPre=/bin/mkdir -p /var/log/liquidsoap
+ExecStartPre=/bin/chown www-data:www-data /var/log/liquidsoap
+
+[Install]
+WantedBy=multi-user.target
