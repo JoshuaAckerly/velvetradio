@@ -41,7 +41,7 @@ fallback_playlist = playlist(
 )
 
 # Wrap in mksafe to guarantee a signal even if the directory is empty
-fallback = mksafe(fallback_playlist)
+fallback_source = mksafe(fallback_playlist)
 
 # ---------------------------------------------------------------------------
 # Live input
@@ -60,7 +60,7 @@ live = input.harbor(
 # ---------------------------------------------------------------------------
 radio = fallback(
     track_sensitive = false,
-    [live, fallback]
+    [live, fallback_source]
 )
 
 # ---------------------------------------------------------------------------
@@ -91,5 +91,5 @@ output.icecast(
     name        = "Velvet Radio (Scheduled)",
     description = "Velvet Radio — Scheduled Programming",
     url         = "https://velvetradio.graveyardjokes.com",
-    fallback
+    fallback_source
 )
