@@ -22,10 +22,8 @@ TimeoutStartSec=30
 StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=liquidsoap-velvetradio
-
-# Ensure the log directory exists
-ExecStartPre=/bin/mkdir -p /var/log/liquidsoap
-ExecStartPre=/bin/chown www-data:www-data /var/log/liquidsoap
+# Note: /var/log/liquidsoap must be pre-created on the server:
+#   sudo mkdir -p /var/log/liquidsoap && sudo chown www-data:www-data /var/log/liquidsoap
 
 [Install]
 WantedBy=multi-user.target
