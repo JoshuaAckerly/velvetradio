@@ -15,7 +15,7 @@ const Listen: React.FC = () => {
                     <div className="mx-auto max-w-xl rounded-lg bg-[#1a1a1a] p-8">
                         <div className="mb-6 flex items-center justify-center gap-2">
                             <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-red-500"></span>
-                            <span className="text-sm font-medium uppercase tracking-widest text-gray-300">On Air</span>
+                            <span className="text-sm font-medium tracking-widest text-gray-300 uppercase">On Air</span>
                         </div>
                         <h2 className="mb-2 text-2xl font-bold">Velvet Radio</h2>
                         <p className="mb-8 text-gray-400">Press play in the bar below to connect to the live stream</p>

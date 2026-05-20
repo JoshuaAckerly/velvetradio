@@ -111,9 +111,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src = null, title, showName, 
                 {/* Seek bar + timestamps (episode mode) / LIVE badge (stream mode) */}
                 <div className="hidden flex-1 items-center gap-2 sm:flex">
                     {isLive ? (
-                        <span className="rounded bg-red-600 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-white">
-                            Live
-                        </span>
+                        <span className="rounded bg-red-600 px-2 py-0.5 text-xs font-bold tracking-wider text-white uppercase">Live</span>
                     ) : (
                         <>
                             <span className="shrink-0 text-xs text-gray-400 tabular-nums">{formatTime(currentTime)}</span>
