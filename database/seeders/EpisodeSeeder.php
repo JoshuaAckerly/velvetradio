@@ -3,19 +3,20 @@
 namespace Database\Seeders;
 
 use App\Models\Episode;
+use App\Models\Show;
 use Illuminate\Database\Seeder;
 
 class EpisodeSeeder extends Seeder
 {
     public function run(): void
     {
-        $shows = \App\Models\Show::all();
+        $shows = Show::all();
         $show0 = $shows->first();
-        assert($show0 instanceof \App\Models\Show);
+        assert($show0 instanceof Show);
         $show1 = $shows->skip(1)->first();
-        assert($show1 instanceof \App\Models\Show);
+        assert($show1 instanceof Show);
         $show2 = $shows->skip(2)->first();
-        assert($show2 instanceof \App\Models\Show);
+        assert($show2 instanceof Show);
 
         $episodes = [
             [

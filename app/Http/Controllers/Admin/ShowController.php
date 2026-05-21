@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Show;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -68,7 +69,7 @@ class ShowController extends Controller
         return redirect()->route('admin.shows.index')->with('success', 'Show deleted.');
     }
 
-    public function generateSlug(Request $request): \Illuminate\Http\JsonResponse
+    public function generateSlug(Request $request): JsonResponse
     {
         return response()->json(['slug' => Str::slug($request->string('title'))]);
     }
