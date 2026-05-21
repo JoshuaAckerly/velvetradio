@@ -7,8 +7,8 @@ use PHPUnit\Framework\TestCase;
 class ExampleTest extends TestCase
 {
     /** @test */
-    public function it_checks_that_true_is_true()
+    public function it_checks_that_true_is_true(): void
     {
-        $this->assertTrue(true);
+        $this->assertSame(1, 1);
     }
 }

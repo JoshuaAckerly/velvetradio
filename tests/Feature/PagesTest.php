@@ -33,7 +33,7 @@ class PagesTest extends TestCase
 
         $response = $this->get('/episodes');
         $response->assertStatus(200);
-        $response->assertInertia(fn ($page) => $page->has('episodes')
+        $response->assertInertia(fn (\Inertia\Testing\AssertableInertia $page) => $page->has('episodes')
             ->where('episodes.0.title', 'Lorem Ipsum Dolor')
         );
     }
@@ -44,7 +44,7 @@ class PagesTest extends TestCase
 
         $response = $this->get('/shows');
         $response->assertStatus(200);
-        $response->assertInertia(fn ($page) => $page->has('shows')
+        $response->assertInertia(fn (\Inertia\Testing\AssertableInertia $page) => $page->has('shows')
             ->where('shows.0.title', 'Lorem Ipsum Radio')
         );
     }
@@ -55,7 +55,7 @@ class PagesTest extends TestCase
 
         $response = $this->get('/hosts');
         $response->assertStatus(200);
-        $response->assertInertia(fn ($page) => $page->has('hosts')
+        $response->assertInertia(fn (\Inertia\Testing\AssertableInertia $page) => $page->has('hosts')
             ->where('hosts.0.name', 'Alex Morgan')
         );
     }

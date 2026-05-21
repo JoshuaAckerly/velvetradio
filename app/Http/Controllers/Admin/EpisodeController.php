@@ -31,6 +31,7 @@ class EpisodeController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        /** @var array<string, mixed> $data */
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -61,6 +62,7 @@ class EpisodeController extends Controller
 
     public function update(Request $request, Episode $episode): RedirectResponse
     {
+        /** @var array<string, mixed> $data */
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',

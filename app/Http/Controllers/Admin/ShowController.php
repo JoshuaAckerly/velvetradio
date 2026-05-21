@@ -28,6 +28,7 @@ class ShowController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        /** @var array<string, mixed> $data */
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -47,6 +48,7 @@ class ShowController extends Controller
 
     public function update(Request $request, Show $show): RedirectResponse
     {
+        /** @var array<string, mixed> $data */
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',

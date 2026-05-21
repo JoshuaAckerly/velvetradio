@@ -31,6 +31,7 @@ class HostController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        /** @var array<string, mixed> $data */
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'bio' => 'nullable|string',
@@ -53,6 +54,7 @@ class HostController extends Controller
 
     public function update(Request $request, Host $host): RedirectResponse
     {
+        /** @var array<string, mixed> $data */
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'bio' => 'nullable|string',

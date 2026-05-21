@@ -87,14 +87,16 @@ Route::get('/episodes', function () {
         ->limit(50)
         ->get()
         ->map(function ($episode) {
+            $audioFile = $episode->audio_file;
+
             return [
                 'id' => $episode->id,
                 'title' => $episode->title,
                 'show' => $episode->show_title,
                 'host' => $episode->host_name,
-                'duration' => gmdate('i:s', $episode->duration),
+                'duration' => is_int($episode->duration) ? gmdate('i:s', $episode->duration) : '0:00',
                 'date' => $episode->published_at,
-                'audio_url' => $episode->audio_file ? asset('storage/'.$episode->audio_file) : null,
+                'audio_url' => is_string($audioFile) && $audioFile !== '' ? asset('storage/'.$audioFile) : null,
             ];
         });
 

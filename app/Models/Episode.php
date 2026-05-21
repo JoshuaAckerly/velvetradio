@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Episode extends Model
 {
+    /** @phpstan-ignore missingType.generics */
     use HasFactory;
 
     protected $fillable = [
@@ -23,12 +25,14 @@ class Episode extends Model
         'duration' => 'integer',
     ];
 
-    public function show()
+    /** @return BelongsTo<Show, Episode> */
+    public function show(): BelongsTo
     {
+        // @phpstan-ignore-next-line return.type
         return $this->belongsTo(Show::class);
     }
 
-    public function getFormattedDurationAttribute()
+    public function getFormattedDurationAttribute(): string
     {
         $minutes = floor($this->duration / 60);
         $seconds = $this->duration % 60;
