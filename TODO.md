@@ -50,7 +50,7 @@
 - [ ] Comment system for episodes
 
 ## � Automation
-- [ ] Add Dependabot (`.github/dependabot.yml`) for npm + composer automated dependency PRs
+- [x] Add Dependabot (`.github/dependabot.yml`) for npm + composer automated dependency PRs
 
 ## �🧪 Testing
 - [ ] Increase test coverage to 80%+
