@@ -49,7 +49,10 @@
 - [ ] User favorites/bookmarks system
 - [ ] Comment system for episodes
 
-## 🧪 Testing
+## � Automation
+- [ ] Add Dependabot (`.github/dependabot.yml`) for npm + composer automated dependency PRs
+
+## �🧪 Testing
 - [ ] Increase test coverage to 80%+
 - [ ] Add frontend testing (Jest/React Testing Library)
 - [ ] Implement E2E tests with Playwright
