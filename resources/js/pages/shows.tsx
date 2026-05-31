@@ -1,9 +1,11 @@
 import Main from '@/layouts/main';
+import { Link } from '@inertiajs/react';
 import React from 'react';
 
 interface Show {
     id: number;
     title: string;
+    slug: string;
     host: string;
     description: string;
     episodes: number;
@@ -28,11 +30,13 @@ const Shows: React.FC<ShowsProps> = ({ shows }) => {
                             <div key={show.id} className="overflow-hidden rounded-lg bg-[#1a1a1a] shadow-lg">
                                 <div className="h-48 bg-[#3d2a4a]"></div>
                                 <div className="p-6">
-                                    <h3 className="mb-2 text-xl font-semibold">{show.title}</h3>
+                                    <h3 className="mb-2 text-xl font-semibold">
+                                        <Link href={`/shows/${show.slug}`} className="hover:underline">{show.title}</Link>
+                                    </h3>
                                     <p className="mb-2 font-medium text-[#4a3d5c]">Hosted by {show.host}</p>
                                     <p className="mb-4 text-gray-300">{show.description}</p>
                                     <p className="mb-4 text-sm text-gray-400">{show.episodes} episodes</p>
-                                    <button className="w-full rounded-lg bg-[#4a3d5c] py-2 text-white hover:bg-[#5c4a70]">View Show</button>
+                                    <Link href={`/shows/${show.slug}`} className="block w-full rounded-lg bg-[#4a3d5c] py-2 text-center text-white hover:bg-[#5c4a70]">View Show</Link>
                                 </div>
                             </div>
                         ))}

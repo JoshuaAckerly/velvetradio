@@ -18,18 +18,20 @@ Route::get('/shows', function () {
         ->select(
             'shows.id',
             'shows.title',
+            'shows.slug',
             'shows.description',
             'hosts.name as host_name',
             DB::raw('(SELECT COUNT(*) FROM episodes WHERE episodes.show_id = shows.id) as episode_count')
         )
         ->where('shows.active', true)
-        ->groupBy('shows.id', 'shows.title', 'shows.description', 'hosts.name')
+        ->groupBy('shows.id', 'shows.title', 'shows.slug', 'shows.description', 'hosts.name')
         ->limit(20)
         ->get()
         ->map(function ($show) {
             return [
                 'id' => $show->id,
                 'title' => $show->title,
+                'slug' => $show->slug,
                 'host' => $show->host_name,
                 'description' => $show->description,
                 'episodes' => $show->episode_count,
@@ -40,6 +42,53 @@ Route::get('/shows', function () {
         'shows' => $shows,
     ]);
 })->name('shows');
+
+Route::get('/shows/{slug}', function (string $slug) {
+    $show = DB::table('shows')
+        ->where('slug', $slug)
+        ->where('active', true)
+        ->first();
+
+    if (! $show) {
+        abort(404);
+    }
+
+    $hosts = DB::table('hosts')
+        ->where('show_id', $show->id)
+        ->select('id', 'name', 'bio', 'avatar')
+        ->get()
+        ->map(fn ($h) => [
+            'id' => $h->id,
+            'name' => $h->name,
+            'bio' => $h->bio ?? '',
+            'avatar' => $h->avatar ?? '',
+        ]);
+
+    $episodes = DB::table('episodes')
+        ->where('show_id', $show->id)
+        ->select('id', 'title', 'duration', 'published_at', 'audio_file')
+        ->orderBy('published_at', 'desc')
+        ->get()
+        ->map(fn ($e) => [
+            'id' => $e->id,
+            'title' => $e->title,
+            'duration' => is_int($e->duration) ? gmdate('i:s', $e->duration) : '0:00',
+            'date' => $e->published_at,
+            'audio_url' => is_string($e->audio_file) && $e->audio_file !== '' ? asset('storage/'.$e->audio_file) : null,
+        ]);
+
+    return Inertia::render('show', [
+        'show' => [
+            'id' => $show->id,
+            'title' => $show->title,
+            'description' => $show->description ?? '',
+            'slug' => $show->slug,
+            'episode_count' => count($episodes),
+        ],
+        'hosts' => $hosts,
+        'episodes' => $episodes,
+    ]);
+})->name('shows.show');
 
 Route::get('/hosts', function () {
     $hosts = DB::table('hosts')
@@ -68,6 +117,38 @@ Route::get('/hosts', function () {
         'hosts' => $hosts,
     ]);
 })->name('hosts');
+
+Route::get('/hosts/{id}', function (int $id) {
+    $host = DB::table('hosts')
+        ->join('shows', 'hosts.show_id', '=', 'shows.id')
+        ->where('hosts.id', $id)
+        ->select(
+            'hosts.id',
+            'hosts.name',
+            'hosts.bio',
+            'hosts.avatar',
+            'shows.title as show_title',
+            'shows.slug as show_slug'
+        )
+        ->first();
+
+    if (! $host) {
+        abort(404);
+    }
+
+    return Inertia::render('host', [
+        'host' => [
+            'id' => $host->id,
+            'name' => $host->name,
+            'bio' => $host->bio ?? '',
+            'avatar' => $host->avatar ?? '',
+        ],
+        'show' => [
+            'title' => $host->show_title,
+            'slug' => $host->show_slug,
+        ],
+    ]);
+})->name('hosts.host');
 
 Route::get('/episodes', function () {
     $episodes = DB::table('episodes')

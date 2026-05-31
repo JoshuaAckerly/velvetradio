@@ -10,6 +10,9 @@
 - [x] Update comprehensive README documentation
 - [x] Create DEPLOYMENT.md with Hypervisor deployment guides
 - [x] Update documentation to reflect Linux backend setup
+- [x] Security headers middleware (CSP, HSTS, X-Frame-Options, etc.)
+- [x] CI/CD pipeline (ci.yml with Node24 + cd.yml auto-deploy on CI success)
+- [x] Deploy script: git reset --hard to handle formatter divergence
 
 ## 🚀 High Priority
 - [ ] Configure streaming functionality
@@ -29,7 +32,7 @@
 - [ ] Add animations and transitions
 - [x] Create custom audio player UI
 - [ ] Design show/host detail pages
-- [ ] Add dark mode toggle
+- [x] Add dark mode toggle
 
 ## 🔧 Technical Improvements
 - [ ] Add API documentation (OpenAPI/Swagger)
