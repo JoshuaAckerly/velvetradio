@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\EpisodeController as AdminEpisodeController;
 use App\Http\Controllers\Admin\HostController as AdminHostController;
 use App\Http\Controllers\Admin\ShowController as AdminShowController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -153,7 +154,7 @@ Route::get('/hosts/{id}', function (int $id) {
     ]);
 })->name('hosts.host');
 
-Route::get('/episodes', function (Illuminate\Http\Request $request) {
+Route::get('/episodes', function (Request $request) {
     $showFilter = $request->query('show');
 
     $allShows = DB::table('shows')
