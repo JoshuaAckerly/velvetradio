@@ -31,11 +31,18 @@ const Hosts: React.FC<HostsProps> = ({ hosts }) => {
                                     {host.avatar}
                                 </div>
                                 <h3 className="mb-2 text-xl font-semibold">
-                                    <Link href={`/hosts/${host.id}`} className="hover:underline">{host.name}</Link>
+                                    <Link href={`/hosts/${host.id}`} className="hover:underline">
+                                        {host.name}
+                                    </Link>
                                 </h3>
                                 <p className="mb-4 font-medium text-[#4a3d5c]">Host of {host.show}</p>
                                 <p className="mb-6 text-gray-300">{host.bio}</p>
-                                <Link href={`/hosts/${host.id}`} className="inline-block rounded-lg bg-[#4a3d5c] px-6 py-2 text-white hover:bg-[#5c4a70]">View Profile</Link>
+                                <Link
+                                    href={`/hosts/${host.id}`}
+                                    className="inline-block rounded-lg bg-[#4a3d5c] px-6 py-2 text-white hover:bg-[#5c4a70]"
+                                >
+                                    View Profile
+                                </Link>
                             </div>
                         ))}
                     </div>
