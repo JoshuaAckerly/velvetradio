@@ -16,6 +16,8 @@ class Show extends Model
         'description',
         'slug',
         'active',
+        'schedule_day',
+        'schedule_time',
     ];
 
     protected $casts = [

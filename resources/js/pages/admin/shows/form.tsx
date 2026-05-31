@@ -8,6 +8,8 @@ interface Show {
     description: string;
     slug: string;
     active: boolean;
+    schedule_day: string | null;
+    schedule_time: string | null;
 }
 
 interface ShowFormProps {
@@ -21,6 +23,8 @@ const ShowForm: React.FC<ShowFormProps> = ({ show }) => {
         description: show?.description ?? '',
         slug: show?.slug ?? '',
         active: show?.active ?? true,
+        schedule_day: show?.schedule_day ?? '',
+        schedule_time: show?.schedule_time ?? '',
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -98,6 +102,31 @@ const ShowForm: React.FC<ShowFormProps> = ({ show }) => {
                     <label htmlFor="active" className="text-sm font-medium">
                         Active
                     </label>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <label className="mb-1 block text-sm font-medium">Schedule Day</label>
+                        <select
+                            value={form.schedule_day}
+                            onChange={(e) => set('schedule_day', e.target.value)}
+                            className="admin-input"
+                        >
+                            <option value="">— None —</option>
+                            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((d) => (
+                                <option key={d} value={d}>{d}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label className="mb-1 block text-sm font-medium">Schedule Time</label>
+                        <input
+                            type="time"
+                            value={form.schedule_time}
+                            onChange={(e) => set('schedule_time', e.target.value)}
+                            className="admin-input"
+                        />
+                    </div>
                 </div>
 
                 <div className="flex gap-3 pt-2">

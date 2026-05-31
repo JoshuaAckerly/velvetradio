@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\EpisodeController as AdminEpisodeController;
 use App\Http\Controllers\Admin\HostController as AdminHostController;
 use App\Http\Controllers\Admin\ShowController as AdminShowController;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -13,30 +14,32 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/shows', function () {
-    $shows = DB::table('shows')
-        ->leftJoin('hosts', 'shows.id', '=', 'hosts.show_id')
-        ->select(
-            'shows.id',
-            'shows.title',
-            'shows.slug',
-            'shows.description',
-            'hosts.name as host_name',
-            DB::raw('(SELECT COUNT(*) FROM episodes WHERE episodes.show_id = shows.id) as episode_count')
-        )
-        ->where('shows.active', true)
-        ->groupBy('shows.id', 'shows.title', 'shows.slug', 'shows.description', 'hosts.name')
-        ->limit(20)
-        ->get()
-        ->map(function ($show) {
-            return [
-                'id' => $show->id,
-                'title' => $show->title,
-                'slug' => $show->slug,
-                'host' => $show->host_name,
-                'description' => $show->description,
-                'episodes' => $show->episode_count,
-            ];
-        });
+    $shows = Cache::remember('shows.index', 300, function () {
+        return DB::table('shows')
+            ->leftJoin('hosts', 'shows.id', '=', 'hosts.show_id')
+            ->select(
+                'shows.id',
+                'shows.title',
+                'shows.slug',
+                'shows.description',
+                'hosts.name as host_name',
+                DB::raw('(SELECT COUNT(*) FROM episodes WHERE episodes.show_id = shows.id) as episode_count')
+            )
+            ->where('shows.active', true)
+            ->groupBy('shows.id', 'shows.title', 'shows.slug', 'shows.description', 'hosts.name')
+            ->limit(20)
+            ->get()
+            ->map(function ($show) {
+                return [
+                    'id' => $show->id,
+                    'title' => $show->title,
+                    'slug' => $show->slug,
+                    'host' => $show->host_name,
+                    'description' => $show->description,
+                    'episodes' => $show->episode_count,
+                ];
+            });
+    });
 
     return Inertia::render('shows', [
         'shows' => $shows,
@@ -150,8 +153,15 @@ Route::get('/hosts/{id}', function (int $id) {
     ]);
 })->name('hosts.host');
 
-Route::get('/episodes', function () {
-    $episodes = DB::table('episodes')
+Route::get('/episodes', function (Illuminate\Http\Request $request) {
+    $showFilter = $request->query('show');
+
+    $allShows = DB::table('shows')
+        ->where('active', true)
+        ->orderBy('title')
+        ->pluck('title', 'id');
+
+    $query = DB::table('episodes')
         ->join('shows', 'episodes.show_id', '=', 'shows.id')
         ->join('hosts', 'shows.id', '=', 'hosts.show_id')
         ->select(
@@ -164,8 +174,14 @@ Route::get('/episodes', function () {
             'hosts.name as host_name'
         )
         ->where('shows.active', true)
-        ->orderBy('episodes.published_at', 'desc')
-        ->limit(50)
+        ->orderBy('episodes.published_at', 'desc');
+
+    if (is_string($showFilter) && $showFilter !== '') {
+        $query->where('shows.title', $showFilter);
+    }
+
+    $episodes = $query
+        ->limit(100)
         ->get()
         ->map(function ($episode) {
             $audioFile = $episode->audio_file;
@@ -183,12 +199,48 @@ Route::get('/episodes', function () {
 
     return Inertia::render('episodes', [
         'episodes' => $episodes,
+        'shows' => $allShows,
+        'activeShow' => $showFilter ?? '',
     ]);
 })->name('episodes');
 
 Route::get('/listen', function () {
     return Inertia::render('listen');
 })->name('listen');
+
+Route::get('/schedule', function () {
+    $shows = Cache::remember('shows.schedule', 300, function () {
+        return DB::table('shows')
+            ->leftJoin('hosts', 'shows.id', '=', 'hosts.show_id')
+            ->select(
+                'shows.id',
+                'shows.title',
+                'shows.slug',
+                'shows.description',
+                'shows.schedule_day',
+                'shows.schedule_time',
+                'hosts.name as host_name'
+            )
+            ->where('shows.active', true)
+            ->whereNotNull('shows.schedule_day')
+            ->whereNotNull('shows.schedule_time')
+            ->groupBy('shows.id', 'shows.title', 'shows.slug', 'shows.description', 'shows.schedule_day', 'shows.schedule_time', 'hosts.name')
+            ->get()
+            ->map(fn ($s) => [
+                'id' => $s->id,
+                'title' => $s->title,
+                'slug' => $s->slug,
+                'description' => $s->description ?? '',
+                'host' => $s->host_name ?? '',
+                'schedule_day' => $s->schedule_day,
+                'schedule_time' => $s->schedule_time,
+            ]);
+    });
+
+    return Inertia::render('schedule', [
+        'shows' => $shows,
+    ]);
+})->name('schedule');
 
 require __DIR__.'/settings.php';
 

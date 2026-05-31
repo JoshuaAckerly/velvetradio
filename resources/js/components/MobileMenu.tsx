@@ -51,6 +51,11 @@ const MobileMenu: React.FC = () => {
                                 </Link>
                             </li>
                             <li>
+                                <Link className="transition-colors hover:text-[#4a3d5c]" href="/schedule" onClick={() => setIsOpen(false)}>
+                                    Schedule
+                                </Link>
+                            </li>
+                            <li>
                                 <a
                                     className="transition-colors hover:text-[#4a3d5c]"
                                     href={getLoginUrl('velvetradio')}

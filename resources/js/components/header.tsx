@@ -38,6 +38,11 @@ const Header: React.FC = () => {
                             </Link>
                         </li>
                         <li>
+                            <Link href="/schedule" className="transition-colors hover:text-[#4a3d5c]">
+                                Schedule
+                            </Link>
+                        </li>
+                        <li>
                             <a href={getLoginUrl('velvetradio')} className="transition-colors hover:text-[#4a3d5c]">
                                 Login
                             </a>
