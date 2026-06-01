@@ -47,15 +47,9 @@ const Schedule: React.FC<ScheduleProps> = ({ shows }) => {
                     <div className="mx-auto max-w-5xl space-y-10">
                         {DAYS.map((day) => (
                             <div key={day}>
-                                <h2
-                                    className={`mb-4 text-2xl font-bold ${day === today ? 'text-[#a78bfa]' : 'text-white'}`}
-                                >
+                                <h2 className={`mb-4 text-2xl font-bold ${day === today ? 'text-[#a78bfa]' : 'text-white'}`}>
                                     {day}
-                                    {day === today && (
-                                        <span className="ml-3 rounded-full bg-[#4a3d5c] px-3 py-0.5 text-sm font-normal">
-                                            Today
-                                        </span>
-                                    )}
+                                    {day === today && <span className="ml-3 rounded-full bg-[#4a3d5c] px-3 py-0.5 text-sm font-normal">Today</span>}
                                 </h2>
 
                                 {byDay[day].length === 0 ? (
@@ -63,25 +57,15 @@ const Schedule: React.FC<ScheduleProps> = ({ shows }) => {
                                 ) : (
                                     <div className="space-y-3">
                                         {byDay[day].map((show) => (
-                                            <div
-                                                key={show.id}
-                                                className="flex items-center gap-6 rounded-lg bg-[#1a1a1a] p-5"
-                                            >
+                                            <div key={show.id} className="flex items-center gap-6 rounded-lg bg-[#1a1a1a] p-5">
                                                 <div className="w-20 shrink-0 text-center">
-                                                    <span className="text-lg font-semibold text-[#a78bfa]">
-                                                        {formatTime(show.schedule_time)}
-                                                    </span>
+                                                    <span className="text-lg font-semibold text-[#a78bfa]">{formatTime(show.schedule_time)}</span>
                                                 </div>
                                                 <div className="flex-1">
-                                                    <Link
-                                                        href={`/shows/${show.slug}`}
-                                                        className="text-lg font-semibold hover:underline"
-                                                    >
+                                                    <Link href={`/shows/${show.slug}`} className="text-lg font-semibold hover:underline">
                                                         {show.title}
                                                     </Link>
-                                                    {show.host && (
-                                                        <p className="text-sm text-gray-400">Hosted by {show.host}</p>
-                                                    )}
+                                                    {show.host && <p className="text-sm text-gray-400">Hosted by {show.host}</p>}
                                                 </div>
                                             </div>
                                         ))}

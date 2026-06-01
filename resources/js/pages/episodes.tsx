@@ -59,9 +59,7 @@ const Episodes: React.FC<EpisodesProps> = ({ episodes, shows, activeShow }) => {
                                     key={name || '__all__'}
                                     onClick={() => handleFilter(name)}
                                     className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                                        activeShow === name
-                                            ? 'bg-[#4a3d5c] text-white'
-                                            : 'bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]'
+                                        activeShow === name ? 'bg-[#4a3d5c] text-white' : 'bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]'
                                     }`}
                                 >
                                     {name || 'All Shows'}

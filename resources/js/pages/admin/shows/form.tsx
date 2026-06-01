@@ -107,14 +107,12 @@ const ShowForm: React.FC<ShowFormProps> = ({ show }) => {
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="mb-1 block text-sm font-medium">Schedule Day</label>
-                        <select
-                            value={form.schedule_day}
-                            onChange={(e) => set('schedule_day', e.target.value)}
-                            className="admin-input"
-                        >
+                        <select value={form.schedule_day} onChange={(e) => set('schedule_day', e.target.value)} className="admin-input">
                             <option value="">— None —</option>
                             {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((d) => (
-                                <option key={d} value={d}>{d}</option>
+                                <option key={d} value={d}>
+                                    {d}
+                                </option>
                             ))}
                         </select>
                     </div>
