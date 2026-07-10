@@ -5,8 +5,8 @@ Web radio application with show, host, episode, and venue management. Includes a
 
 ## Tech Stack
 - **Backend**: Laravel **11** (not 12 — do not upgrade), PHP 8.2+, Sanctum (session)
-- **Frontend**: React 18, TypeScript, Inertia.js 2, Tailwind CSS 4, Radix UI, Headless UI, Vite
-- **Testing**: PHPUnit 11 (`php artisan test`)
+- **Frontend**: React 18, TypeScript, Inertia.js 3, Tailwind CSS 4, Radix UI, Headless UI, Vite
+- **Testing**: PHPUnit 11 (`php artisan test`), Vitest + React Testing Library
 - **Storage**: MySQL, optional Redis
 - **SSR Ports**: 13719 (production), 13718 (test)
 
@@ -58,6 +58,7 @@ POST/GET/PUT/DELETE /venues/{venue} (auth, verified)
 ## Build & Test
 ```bash
 php artisan test
+npm run test            # Vitest
 npm run build:ssr
 npm run types
 npm run lint
