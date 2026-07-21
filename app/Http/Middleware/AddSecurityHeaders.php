@@ -23,7 +23,7 @@ class AddSecurityHeaders
             "style-src 'self' 'unsafe-inline' https://fonts.bunny.net",
             "font-src 'self' https://fonts.bunny.net",
             "img-src 'self' data: https: http://d3fjkusrpksks7.cloudfront.net blob:",
-            "connect-src 'self' https://graveyardjokes.com https://www.graveyardjokes.com https://www.google-analytics.com https://region1.google-analytics.com https://pagead2.googlesyndication.com".($isDev ? " http://localhost:* ws://localhost:* {$devViteOrigin} ws://velvetradio.graveyardjokes.local:8087 http://graveyardjokes.local http://velvetradio.graveyardjokes.local" : ''),
+            "connect-src 'self' https://graveyardjokes.com https://www.graveyardjokes.com https://www.google-analytics.com https://region1.google-analytics.com https://pagead2.googlesyndication.com".($isDev ? " http://localhost:* ws://localhost:* {$devViteOrigin} ws://velvetradio.graveyardjokes.local:8087 http://graveyardjokes.local:* http://velvetradio.graveyardjokes.local:*" : ''),
             'frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com',
             "frame-ancestors 'none'",
             "object-src 'none'",

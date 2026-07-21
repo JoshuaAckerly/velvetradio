@@ -56,7 +56,7 @@
 
                 let trackingUrl = '/api/track-visit';
                 if (isLocalSubdomain) {
-                    trackingUrl = 'http://graveyardjokes.local/api/track-visit';
+                    trackingUrl = 'http://graveyardjokes.local:8000/api/track-visit';
                 } else if (isTestSubdomain) {
                     trackingUrl = 'http://graveyardjokes.test/api/track-visit';
                 } else if (!isMainLocal && !isMainTest && !isMainProd) {
@@ -145,7 +145,7 @@
         @viteReactRefresh
         @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         @inertiaHead
-        @if(config('services.google_adsense.client_id'))
+        @if(app()->environment('production') && config('services.google_adsense.client_id'))
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ config('services.google_adsense.client_id') }}" crossorigin="anonymous"></script>
         @endif
     </head>

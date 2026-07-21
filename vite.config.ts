@@ -29,7 +29,11 @@ export default defineConfig(({ mode }) => {
             host: '0.0.0.0',
             origin: 'http://velvetradio.graveyardjokes.local:8087',
             cors: {
-                origin: 'http://velvetradio.graveyardjokes.local',
+                origin: [
+                    'http://velvetradio.graveyardjokes.local',
+                    'http://velvetradio.graveyardjokes.local:8006',
+                    'http://localhost:8006',
+                ],
                 credentials: true
             },
             allowedHosts: ['velvetradio.graveyardjokes.local'],
