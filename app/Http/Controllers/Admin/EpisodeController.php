@@ -7,6 +7,7 @@ use App\Models\Episode;
 use App\Models\Show;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -48,6 +49,8 @@ class EpisodeController extends Controller
         }
 
         Episode::create($data);
+        Cache::forget('rss.global');
+        Cache::forget('rss.show.'.$data['show_id']);
 
         return redirect()->route('admin.episodes.index')->with('success', 'Episode created.');
     }
@@ -79,13 +82,18 @@ class EpisodeController extends Controller
         }
 
         $episode->update($data);
+        Cache::forget('rss.global');
+        Cache::forget('rss.show.'.$data['show_id']);
 
         return redirect()->route('admin.episodes.index')->with('success', 'Episode updated.');
     }
 
     public function destroy(Episode $episode): RedirectResponse
     {
+        $showId = $episode->show_id;
         $episode->delete();
+        Cache::forget('rss.global');
+        Cache::forget('rss.show.'.$showId);
 
         return redirect()->route('admin.episodes.index')->with('success', 'Episode deleted.');
     }

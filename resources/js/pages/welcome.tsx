@@ -13,7 +13,8 @@ const Welcome: React.FC = () => {
                     <img
                         src={`${cdn}/images/velvetradio_LandingImage.webp?v=${Date.now()}`}
                         alt="Velvet Radio Hero"
-                        className="h-full w-full object-cover opacity-40"
+                        className="h-full w-full object-cover opacity-40 transition-transform duration-700 hover:scale-105"
+                        loading="eager"
                         onError={(e) => console.error('Failed to load hero image:', e)}
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-[#2d3a1f]/80 to-[#2d3a1f]/60"></div>

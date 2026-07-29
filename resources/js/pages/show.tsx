@@ -1,4 +1,5 @@
 import AudioPlayer from '@/components/AudioPlayer';
+import SocialShare from '@/components/SocialShare';
 import Main from '@/layouts/main';
 import { Link } from '@inertiajs/react';
 import React, { useState } from 'react';
@@ -53,10 +54,17 @@ const Show: React.FC<ShowProps> = ({ show, hosts, episodes }) => {
     return (
         <Main>
             <div className="min-h-screen bg-[#0f0f0f] pb-20 text-white">
-                <section className="border-b border-gray-700 bg-[#2d3a1f] py-12 text-center">
+                <section className="border-b border-gray-700 bg-[#2d3a1f] py-12 text-center transition-all duration-300">
                     <h1 className="mb-2 text-4xl font-bold">{show.title}</h1>
                     <p className="mb-4 text-lg text-gray-300">{show.description}</p>
                     <span className="inline-block rounded-full bg-[#4a3d5c] px-3 py-1 text-sm">{show.episode_count} episodes</span>
+                    <div className="mt-4 flex justify-center">
+                        <SocialShare
+                            url={typeof window !== 'undefined' ? window.location.href : ''}
+                            title={show.title}
+                            description={show.description}
+                        />
+                    </div>
                 </section>
 
                 {hosts.length > 0 && (

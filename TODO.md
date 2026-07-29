@@ -29,7 +29,7 @@
 
 ## 🎨 Design & UX
 - [x] Enhance responsive design for tablets
-- [ ] Add animations and transitions
+- [x] Add animations and transitions (show cards hover lift, hero image zoom, episode card transitions)
 - [x] Create custom audio player UI
 - [x] Design show/host detail pages
 - [x] Add dark mode toggle
@@ -37,15 +37,15 @@
 ## 🔧 Technical Improvements
 - [ ] Add API documentation (OpenAPI/Swagger)
 - [x] Implement caching strategy for show data
-- [ ] Add monitoring and error tracking
+- [x] Add monitoring and error tracking (Sentry — set `SENTRY_LARAVEL_DSN` + `VITE_SENTRY_DSN` in production env)
 - [ ] Set up automated backups
-- [ ] Optimize database queries with indexes
+- [x] Optimize database queries with indexes (composite index episodes.show_id+published_at; shows active+schedule_day)
 
 ## 📱 Future Features
 - [N/A] Mobile app (React Native) (out of scope for portfolio site)
-- [ ] Podcast RSS feed generation
-- [ ] Social media integration
-- [ ] Email notifications for new episodes
+- [x] Podcast RSS feed generation (/rss and /rss/{slug} routes; cached 30min)
+- [x] Social media integration (SocialShare component on show pages; social links in footer)
+- [x] Email notifications for new episodes (EpisodeObserver + EpisodePublished mailable + newsletter_subscribers table)
 - [ ] User favorites/bookmarks system
 - [ ] Comment system for episodes
 

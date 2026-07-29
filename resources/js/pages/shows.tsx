@@ -26,8 +26,12 @@ const Shows: React.FC<ShowsProps> = ({ shows }) => {
 
                 <section className="px-6 py-12">
                     <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                        {shows.map((show: Show) => (
-                            <div key={show.id} className="overflow-hidden rounded-lg bg-[#1a1a1a] shadow-lg">
+                        {shows.map((show: Show, idx: number) => (
+                            <div
+                                key={show.id}
+                                className="overflow-hidden rounded-lg bg-[#1a1a1a] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                                style={{ animationDelay: `${idx * 50}ms` }}
+                            >
                                 <div className="h-48 bg-[#3d2a4a]"></div>
                                 <div className="p-6">
                                     <h3 className="mb-2 text-xl font-semibold">

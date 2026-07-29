@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\EpisodeController as AdminEpisodeController;
 use App\Http\Controllers\Admin\HostController as AdminHostController;
 use App\Http\Controllers\Admin\ShowController as AdminShowController;
+use App\Http\Controllers\RssController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -243,6 +244,10 @@ Route::get('/schedule', function () {
         'shows' => $shows,
     ]);
 })->name('schedule');
+
+// RSS feeds
+Route::get('/rss', [RssController::class, 'index'])->name('rss.index');
+Route::get('/rss/{slug}', [RssController::class, 'show'])->name('rss.show');
 
 // Legal pages
 Route::get('/privacy', function () {
