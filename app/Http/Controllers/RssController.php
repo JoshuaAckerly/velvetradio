@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -104,14 +105,14 @@ class RssController extends Controller
     /**
      * Build the RSS XML string.
      *
-     * @param  \Illuminate\Support\Collection<int, object>  $episodes
+     * @param  Collection<int, object>  $episodes
      */
     private function buildFeed(
         string $title,
         string $link,
         string $description,
         string $feedUrl,
-        \Illuminate\Support\Collection $episodes,
+        Collection $episodes,
         string $siteUrl,
     ): string {
         $title = htmlspecialchars($title, ENT_XML1);

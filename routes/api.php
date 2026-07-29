@@ -11,4 +11,3 @@ Route::patch('/messages/{id}/read', [MessageProxyController::class, 'markRead'])
 // Newsletter
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->middleware('throttle:5,1');
 Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
-
