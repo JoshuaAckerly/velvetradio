@@ -20,7 +20,7 @@ const Hosts: React.FC<HostsProps> = ({ hosts }) => {
             <div className="min-h-screen bg-[#0f0f0f] text-white">
                 <section className="border-b border-gray-700 bg-[#2d3a1f] py-12 text-center">
                     <h1 className="mb-4 text-4xl font-bold">Hosts</h1>
-                    <p className="text-lg text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                    <p className="text-lg text-gray-300">The voices behind Velvet Radio — curating sound, culture, and conversation.</p>
                 </section>
 
                 <section className="px-6 py-12">

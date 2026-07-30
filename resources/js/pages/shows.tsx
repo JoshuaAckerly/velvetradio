@@ -21,7 +21,7 @@ const Shows: React.FC<ShowsProps> = ({ shows }) => {
             <div className="min-h-screen bg-[#0f0f0f] text-white">
                 <section className="border-b border-gray-700 bg-[#2d3a1f] py-12 text-center">
                     <h1 className="mb-4 text-4xl font-bold">Shows</h1>
-                    <p className="text-lg text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                    <p className="text-lg text-gray-300">Original programming spanning jazz, indie, electronic, and beyond.</p>
                 </section>
 
                 <section className="px-6 py-12">
