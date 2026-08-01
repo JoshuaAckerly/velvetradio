@@ -1,11 +1,37 @@
+import { useGSAP } from '@gsap/react';
 import Main from '@/layouts/main';
-import React from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useRef } from 'react';
 import { getProjectUrl } from '../env';
 const cdn = import.meta.env.VITE_ASSET_URL;
 
 const Welcome: React.FC = () => {
+    const pageRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        // Hero title entrance
+        gsap.fromTo('.vr-hero-content',
+            { opacity: 0, y: 40 },
+            { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.1 }
+        );
+        // Scroll-triggered stagger reveals
+        gsap.utils.toArray<HTMLElement>('.vr-reveal').forEach((el) => {
+            gsap.fromTo(el,
+                { opacity: 0, y: 40 },
+                { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+                  scrollTrigger: { trigger: el, start: 'top 85%', once: true } }
+            );
+        });
+        gsap.fromTo('.vr-card',
+            { opacity: 0, y: 35 },
+            { opacity: 1, y: 0, duration: 0.6, stagger: 0.13, ease: 'power2.out',
+              scrollTrigger: { trigger: '.vr-card', start: 'top 82%', once: true } }
+        );
+    }, { scope: pageRef });
     return (
         <Main>
+            <div ref={pageRef}>
             {/* Hero Section */}
             <section className="relative overflow-hidden border-b border-gray-700 text-white">
                 {/* Hero Image Background */}
@@ -20,10 +46,10 @@ const Welcome: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-b from-[#2d3a1f]/80 to-[#2d3a1f]/60"></div>
                 </div>
                 {/* Hero Content */}
-                <div className="relative z-10 px-4 py-24 text-center">
+                <div className="relative z-10 vr-hero-content px-4 py-24 text-center">
                     <h2 className="mb-2 text-5xl font-bold drop-shadow-lg">Velvet Radio</h2>
                     <p className="mx-auto mb-6 max-w-2xl text-lg drop-shadow-md">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
+                        Independent programming for the open-eared — jazz, indie, electronic, and everything in between.
                     </p>
                     <a
                         href={getProjectUrl('velvetradio')}
@@ -65,6 +91,7 @@ const Welcome: React.FC = () => {
                     ))}
                 </div>
             </section>
+            </div>
         </Main>
     );
 };
