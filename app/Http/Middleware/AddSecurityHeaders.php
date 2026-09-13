@@ -14,16 +14,16 @@ class AddSecurityHeaders
         $response = $next($request);
 
         $isDev = app()->environment('local', 'testing');
-        $devViteOrigin = 'http://velvetradio.graveyardjokes.local:8087';
+        $devViteOrigin = 'http://velvetradio.graveyardjokes.test:8087';
 
         // Content Security Policy
         $csp = implode('; ', [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://tpc.googlesyndication.com".($isDev ? " http://localhost:* {$devViteOrigin}" : ''),
+            "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://tpc.googlesyndication.com".($isDev ? " http://localhost:* {$devViteOrigin} http://10.0.1.20:*" : ''),
             "style-src 'self' 'unsafe-inline' https://fonts.bunny.net",
             "font-src 'self' https://fonts.bunny.net",
             "img-src 'self' data: https: http://d3fjkusrpksks7.cloudfront.net blob:",
-            "connect-src 'self' https://graveyardjokes.com https://www.graveyardjokes.com https://www.google-analytics.com https://region1.google-analytics.com https://pagead2.googlesyndication.com".($isDev ? " http://localhost:* ws://localhost:* {$devViteOrigin} ws://velvetradio.graveyardjokes.local:8087 http://graveyardjokes.local:* http://velvetradio.graveyardjokes.local:*" : ''),
+            "connect-src 'self' https://graveyardjokes.com https://www.graveyardjokes.com https://www.google-analytics.com https://region1.google-analytics.com https://pagead2.googlesyndication.com".($isDev ? " http://localhost:* ws://localhost:* http://10.0.1.20:* ws://10.0.1.20:* {$devViteOrigin} ws://velvetradio.graveyardjokes.test:8087 http://10.0.1.20:* ws://10.0.1.20:* http://graveyardjokes.test:* http://velvetradio.graveyardjokes.test:*" : ''),
             'frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com',
             "frame-ancestors 'none'",
             "object-src 'none'",

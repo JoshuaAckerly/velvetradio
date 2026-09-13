@@ -27,16 +27,17 @@ export default defineConfig(({ mode, isSsrBuild }) => {
         server = {
             port: 8087,
             host: '0.0.0.0',
-            origin: 'http://velvetradio.graveyardjokes.local:8087',
+            origin: env.VITE_ORIGIN || 'http://velvetradio.graveyardjokes.test:8087',
             cors: {
                 origin: [
-                    'http://velvetradio.graveyardjokes.local',
-                    'http://velvetradio.graveyardjokes.local:8006',
+                    'http://velvetradio.graveyardjokes.test',
+                    'http://velvetradio.graveyardjokes.test:8006',
                     'http://localhost:8006',
+                    'http://10.0.1.20:8006',
                 ],
                 credentials: true
             },
-            allowedHosts: ['velvetradio.graveyardjokes.local'],
+            allowedHosts: ['velvetradio.graveyardjokes.test', '10.0.1.20'],
         };
     }
 
