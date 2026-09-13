@@ -29,5 +29,5 @@ createServer(
                 return <App {...props} />;
             },
         }),
-    13718, // velvetradio SSR port
+    { port: 13718, host: '127.0.0.1' }, // velvetradio SSR port
 );
